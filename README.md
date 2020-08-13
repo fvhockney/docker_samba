@@ -15,9 +15,26 @@ Other then that the container features are kept the same.
 
 ### Samba
 
+* __GROUP\_groupname__
+    * multiple variables/groups possible
+    * adds a new group account with the given username and the env value as the group id
+        * if you want to let the system assign the id then just provide a blank string
+    * will fail if groupname or gid is already present
+
 * __ACCOUNT\_username__
     * multiple variables/accounts possible
     * adds a new user account with the given username and the env value as password
+    * the uid and gid are optional
+    
+* __username\_GID___
+    * sets the GID of _username_ to the values
+    * will fail if gid is not present
+
+* __username\_UID__
+    * sets the UID of _username_ to the values
+    * will fail if uid is already assigned
+    * on the debian image, uids start being assigned at 1000
+        * if you set a user to 10000, then the _next_ user will git 10001 because of  how _useradd_ works
 
 to restrict access of volumes you can add the following to your samba volume config:
 
